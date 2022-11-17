@@ -1,10 +1,9 @@
 import './App.scss'
+import Board from './components/Board'
 
 function App () {
   return (
-    <>
-      React Template for Ember & Moki Co.
-    </>
+    <Board />
   )
 }
 
