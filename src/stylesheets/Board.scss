@@ -1,0 +1,8 @@
+#board {
+  display: grid;
+  width: 612px;
+  height: 612px;
+  grid-template-columns: 204px 204px 204px;
+  grid-template-rows: 204px 204px 204px;
+  border: 1.5px solid red;
+}
