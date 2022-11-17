@@ -3,7 +3,7 @@ import '../stylesheets/Tile.scss'
 
 const Tile = () => {
   return (
-    <div className="tile">
+    <div className="tile" data-testid='game-tile'>
 
     </div>
   )
