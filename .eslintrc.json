@@ -28,6 +28,8 @@
         "react/react-in-jsx-scope": "off",
         "indent": ["error", 2],
         "no-unused-expressions": "off",
-        "jest/valid-expect": "off"
+        "jest/valid-expect": "off",
+        "react/prop-types": "off",
+        "no-unused-vars": "off"
     }
 }
