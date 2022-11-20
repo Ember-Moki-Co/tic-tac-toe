@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../stylesheets/Tile.scss'
 
-const Tile = ({ tile, board, currentPlayer, setCurrentPlayer, player1, player2, setPlayer1, setPlayer2 }) => {
+const Tile = ({ tile, board, currentPlayer, setCurrentPlayer, setPlayer1, setPlayer2, winnerMessage }) => {
   const handleTileChange = () => {
     if (typeof board[tile] === 'number') {
       currentPlayer === '❌' ? setCurrentPlayer('⭕️') : setCurrentPlayer('❌')
@@ -18,7 +18,7 @@ const Tile = ({ tile, board, currentPlayer, setCurrentPlayer, player1, player2, 
     <div
       className='tile'
       data-testid='game-tile'
-      onClick={() => handleTileChange()}
+      onClick={winnerMessage.length > 1 ? undefined : () => handleTileChange()}
     >
       {tile}
     </div>
