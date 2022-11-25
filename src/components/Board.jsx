@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Tile from './Tile'
 import '../stylesheets/Board.scss'
 
 const Board = () => {
-  const [board, setBoard] = useState([...Array(9).keys()])
+  const [board] = useState([...Array(9).keys()])
   const [currentPlayer, setCurrentPlayer] = useState('❌')
   const [player1, setPlayer1] = useState([])
   const [player2, setPlayer2] = useState([])

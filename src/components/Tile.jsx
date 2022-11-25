@@ -20,7 +20,7 @@ const Tile = ({ tile, board, currentPlayer, setCurrentPlayer, setPlayer1, setPla
       data-testid='game-tile'
       onClick={winnerMessage.length > 1 ? undefined : () => handleTileChange()}
     >
-      {tile}
+      {typeof tile === 'number' ? undefined : tile}
     </div>
   )
 }
