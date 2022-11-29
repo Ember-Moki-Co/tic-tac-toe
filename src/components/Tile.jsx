@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import '../stylesheets/Tile.scss'
 
-const Tile = ({ tile, board, currentPlayer, setCurrentPlayer, setPlayer1, setPlayer2, winnerMessage }) => {
+const Tile = ({ tile, board, currentPlayer, setCurrentPlayer, setPlayerOneMoves, setPlayerTwoMoves, winnerMessage, turnOne, turnTwo }) => {
   const handleTileChange = () => {
     if (typeof board[tile] === 'number') {
-      currentPlayer === '❌' ? setCurrentPlayer('⭕️') : setCurrentPlayer('❌')
+      currentPlayer === turnOne ? setCurrentPlayer(turnTwo) : setCurrentPlayer(turnOne)
       board[tile] = currentPlayer
-      if (currentPlayer === '❌') {
-        setPlayer1(player1 => [...player1, tile])
+      if (currentPlayer === turnOne) {
+        setPlayerOneMoves(playerOneMoves => [...playerOneMoves, tile])
       } else {
-        setPlayer2(player2 => [...player2, tile])
+        setPlayerTwoMoves(playerTwoMoves => [...playerTwoMoves, tile])
       }
     }
   }
