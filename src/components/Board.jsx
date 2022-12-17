@@ -20,28 +20,17 @@ const Board = ({ turnOne, turnTwo }) => {
   let winnerMessage = ' '
 
   winCondition.map(conditions => {
-    return conditions.map(condition => {
-      console.log('a', condition)
-      if (playerOneMoves === condition && playerOneMoves.length >= 3) {
-        winnerMessage = 'bruh'
-      }
-      return undefined
-    })
-  })
-  // winCondition.forEach((condition) => {
-  //   if (JSON.stringify(condition) === 'number') {
-  //     winnerMessage = 'Draw!'
-  //   } else if ('bruh' === 'bruh') {
-  //     // winnerMessage = `${turnOne} wins!`
-  //     console.log(condition)
-  //   } else if (playerTwoMoves.includes(condition)) {
-  //     winnerMessage = `${turnTwo} wins!`
-  //   } else {
-  //     undefined
-  //   }
-  // })
+    const playerOneWin = conditions.every(value => playerOneMoves.includes(value)) && playerOneMoves.length >= 3
+    const playerTwoWin = conditions.every(value => playerTwoMoves.includes(value)) && playerTwoMoves.length >= 3
 
-  console.log(playerTwoMoves)
+    if (playerOneWin) {
+      winnerMessage = `${turnOne} wins!`
+    } else if (playerTwoWin) {
+      winnerMessage = `${turnTwo} wins!`
+    }
+    return undefined
+  })
+
   return (
     <>
       <h1>{winnerMessage}</h1>
