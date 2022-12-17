@@ -7,16 +7,41 @@ const Board = ({ turnOne, turnTwo }) => {
   const [currentPlayer, setCurrentPlayer] = useState(turnOne)
   const [playerOneMoves, setPlayerOneMoves] = useState([])
   const [playerTwoMoves, setPlayerTwoMoves] = useState([])
-  const winCondition = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+  const winCondition = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ]
   let winnerMessage = ' '
-  winCondition.forEach(condition => {
-    JSON.stringify(condition) === JSON.stringify(playerOneMoves)
-      ? winnerMessage = `${turnOne} wins!`
-      : JSON.stringify(condition) === JSON.stringify(playerTwoMoves)
-        ? winnerMessage = `${turnTwo} wins!`
-        : undefined
-  })
 
+  winCondition.map(conditions => {
+    return conditions.map(condition => {
+      console.log('a', condition)
+      if (playerOneMoves === condition && playerOneMoves.length >= 3) {
+        winnerMessage = 'bruh'
+      }
+      return undefined
+    })
+  })
+  // winCondition.forEach((condition) => {
+  //   if (JSON.stringify(condition) === 'number') {
+  //     winnerMessage = 'Draw!'
+  //   } else if ('bruh' === 'bruh') {
+  //     // winnerMessage = `${turnOne} wins!`
+  //     console.log(condition)
+  //   } else if (playerTwoMoves.includes(condition)) {
+  //     winnerMessage = `${turnTwo} wins!`
+  //   } else {
+  //     undefined
+  //   }
+  // })
+
+  console.log(playerTwoMoves)
   return (
     <>
       <h1>{winnerMessage}</h1>
