@@ -3,46 +3,44 @@ import Tile from './Tile'
 import '../stylesheets/Board.scss'
 
 const Board = ({ turnOne, turnTwo }) => {
-  const [board] = useState([...Array(9).keys()])
+  const [board, setBoard] = useState([...Array(9).keys()])
   const [currentPlayer, setCurrentPlayer] = useState(turnOne)
-  const [playerOneMoves, setPlayerOneMoves] = useState([])
-  const [playerTwoMoves, setPlayerTwoMoves] = useState([])
-  const [gameWon, setGameWon] = useState(false)
-  const winCondition = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ]
-  let winnerMessage = ' '
+  const [gameOver, setGameOver] = useState(false)
+  const [winnerMessage, setWinnerMessage] = useState(undefined)
 
-  // const draw = playerOneWin === false && playerTwoWin === false
-  // console.log(board.every(tile => typeof tile !== 'number'))
-  // console.log(playerOneWin)
-  const bruh = gameWon === false && playerOneMoves.length + playerTwoMoves.length === 9
+  const checkGameOver = (board) => {
+    // Define winning combinations
+    const winningCombos = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ]
 
-  winCondition.map(conditions => {
-    // if (bruh && board.every(tile => typeof tile !== 'number')) {
-    //   winnerMessage = 'Draw!'
-    // }
-
-    if (conditions.every(value => playerOneMoves.includes(value)) && playerOneMoves.length >= 3) {
-      () => setGameWon(true)
-      winnerMessage = `${turnOne} wins!`
-    } else if (conditions.every(value => playerTwoMoves.includes(value)) && playerTwoMoves.length >= 3) {
-      () => setGameWon(true)
-      winnerMessage = `${turnTwo} wins!`
+    const wins = winningCombos.map((combo) =>
+      combo.every((i) => typeof board[i] !== 'number' && board[i] === board[combo[0]])
+    )
+    if (wins.includes(true)) {
+      setGameOver(true)
+      setWinnerMessage(`${currentPlayer} wins!`)
+      return
     }
-    return undefined
-  })
 
-  // else if (board.every(tile => typeof tile !== 'number') && playerOneMoves.length + playerTwoMoves.length === 9 && draw) {
-  //   winnerMessage = 'Draw!'
-  // }
+    if (board.every((square) => typeof square !== 'number')) {
+      setGameOver(true)
+      setWinnerMessage('Draw!')
+    }
+  }
+
+  const resetGame = () => {
+    setBoard([...Array(9).keys()])
+    setCurrentPlayer(turnOne)
+    setGameOver(false)
+  }
 
   return (
     <>
@@ -56,11 +54,11 @@ const Board = ({ turnOne, turnTwo }) => {
               board={board}
               currentPlayer={currentPlayer}
               setCurrentPlayer={setCurrentPlayer}
-              setPlayerOneMoves={setPlayerOneMoves}
-              setPlayerTwoMoves={setPlayerTwoMoves}
-              winnerMessage={winnerMessage}
               turnOne={turnOne}
               turnTwo={turnTwo}
+              gameOver={gameOver}
+              setBoard={setBoard}
+              checkGameOver={checkGameOver}
             />
           )
         })}
