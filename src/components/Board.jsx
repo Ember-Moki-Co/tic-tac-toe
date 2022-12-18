@@ -23,19 +23,27 @@ const Board = ({ turnOne, turnTwo }) => {
   // const draw = playerOneWin === false && playerTwoWin === false
   // console.log(board.every(tile => typeof tile !== 'number'))
   // console.log(playerOneWin)
-  const bruh = gameWon === false && playerOneMoves.length + playerTwoMoves.length === 9
+  const draw = gameWon === false && playerOneMoves.length + playerTwoMoves.length === 9
 
   winCondition.map(conditions => {
+    console.log(board.every(tile => typeof tile !== 'number') && conditions.some(tile => playerOneMoves.includes(tile)))
+    console.log(conditions)
+    // console.log(board.every(tile => typeof tile !== 'number') && conditions.some(tile => playerOneMoves.includes(tile)) === false && conditions.every(tile => playerTwoMoves.includes(tile)) === false)
     // if (bruh && board.every(tile => typeof tile !== 'number')) {
     //   winnerMessage = 'Draw!'
     // }
+    // if (conditions.every(tile => playerOneMoves.includes(!tile)) && conditions.every(tile => playerTwoMoves.includes(!tile))) {
 
-    if (conditions.every(value => playerOneMoves.includes(value)) && playerOneMoves.length >= 3) {
+    if (board.every(tile => typeof tile !== 'number') && conditions.some(tile => playerOneMoves.includes(tile)) === false && conditions.some(tile => playerTwoMoves.includes(tile)) === false) {
+      winnerMessage = 'Draw!'
+    } else if ((conditions.every(tile => playerOneMoves.includes(tile)) && playerOneMoves.length >= 3) || (board.every(tile => typeof tile !== 'number') && conditions.every(tile => playerOneMoves.includes(tile)))) {
       () => setGameWon(true)
       winnerMessage = `${turnOne} wins!`
-    } else if (conditions.every(value => playerTwoMoves.includes(value)) && playerTwoMoves.length >= 3) {
+    } else if ((conditions.every(tile => playerTwoMoves.includes(tile)) && playerTwoMoves.length >= 3) || (board.every(tile => typeof tile !== 'number') && conditions.every(tile => playerTwoMoves.includes(tile)))) {
       () => setGameWon(true)
       winnerMessage = `${turnTwo} wins!`
+    } else if (board.every(tile => typeof tile !== 'number')) {
+      winnerMessage = 'Draw!'
     }
     return undefined
   })
@@ -43,7 +51,6 @@ const Board = ({ turnOne, turnTwo }) => {
   // else if (board.every(tile => typeof tile !== 'number') && playerOneMoves.length + playerTwoMoves.length === 9 && draw) {
   //   winnerMessage = 'Draw!'
   // }
-
   return (
     <>
       <h1>{winnerMessage}</h1>
