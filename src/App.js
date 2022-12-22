@@ -8,23 +8,32 @@ function App () {
   const [turnTwo, setTurnTwo] = useState(null)
   const [gameReady, setGameReady] = useState(false)
 
+  const fullReset = () => {
+    setGameReady(false)
+    setTurnOne(null)
+    setTurnTwo(null)
+  }
+
   return (
     <>
       {!gameReady
-        ? <PlayerSelection
-          turnOne={turnOne}
-          setTurnOne={setTurnOne}
-          turnTwo={turnTwo}
-          setTurnTwo={setTurnTwo}
-          gameReady={gameReady}
-          setGameReady={setGameReady}
-        />
-        : <Board
-          turnOne={turnOne}
-          turnTwo={turnTwo}
-          gameReady={gameReady}
-        />
-      }
+        ? (
+          <PlayerSelection
+            turnOne={turnOne}
+            setTurnOne={setTurnOne}
+            turnTwo={turnTwo}
+            setTurnTwo={setTurnTwo}
+            gameReady={gameReady}
+            setGameReady={setGameReady}
+          />
+        )
+        : (
+          <Board
+            turnOne={turnOne}
+            turnTwo={turnTwo}
+            fullReset={fullReset}
+          />
+        )}
     </>
   )
 }
