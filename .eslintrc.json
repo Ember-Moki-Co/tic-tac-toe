@@ -30,6 +30,7 @@
         "no-unused-expressions": "off",
         "jest/valid-expect": "off",
         "react/prop-types": "off",
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
+        "quotes": "off"
     }
 }

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Tile from './Tile'
 import '../stylesheets/Board.scss'
+import PlayerSelection from './PlayerSelection'
 
-const Board = ({ turnOne, turnTwo }) => {
+const Board = ({ turnOne, turnTwo, fullReset }) => {
   const [board, setBoard] = useState([...Array(9).keys()])
   const [currentPlayer, setCurrentPlayer] = useState(turnOne)
   const [gameOver, setGameOver] = useState(false)
@@ -40,6 +41,7 @@ const Board = ({ turnOne, turnTwo }) => {
     setBoard([...Array(9).keys()])
     setCurrentPlayer(turnOne)
     setGameOver(false)
+    setWinnerMessage(undefined)
   }
 
   return (
@@ -63,6 +65,8 @@ const Board = ({ turnOne, turnTwo }) => {
           )
         })}
       </div>
+      {gameOver ? <button onClick={() => resetGame()}>Play Again?</button> : undefined}
+      {gameOver ? <button onClick={() => fullReset()}>Reset Players</button> : undefined}
     </>
   )
 }
